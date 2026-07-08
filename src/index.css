@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-900: #08080e;
+  --color-deep-800: #0d0d18;
+  --color-deep-700: #121222;
+  --color-deep-600: #181830;
+  --color-deep-500: #222244;
+  --color-cyber-cyan: #00d4ff;
+  --color-cyber-teal: #06b6d4;
+  --color-cyber-blue: #3b82f6;
+  --color-ember: #f59e0b;
+  --color-ember-dark: #d97706;
+  --color-neon: #a78bfa;
+  --color-neon-pink: #ec4899;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-deep-900 text-gray-100 antialiased;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  ::selection {
+    @apply bg-cyber-cyan/30 text-white;
+  }
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes grid-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
