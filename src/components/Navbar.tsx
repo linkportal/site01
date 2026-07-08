@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -26,14 +27,14 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <a href="#" className="group flex items-center gap-2">
+        <Link to="/" className="group flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cyber-cyan to-cyber-blue text-sm font-bold text-white shadow-lg shadow-cyber-cyan/20 transition-transform duration-300 group-hover:scale-110">
             S
           </span>
           <span className="text-lg font-bold tracking-tight">
             Site<span className="text-cyber-cyan">01</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav links */}
         <div className="hidden items-center gap-8 md:flex">
@@ -51,18 +52,18 @@ export default function Navbar() {
 
         {/* Desktop auth buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <a
-            href="#"
+          <Link
+            to="/dashboard"
             className="rounded-lg px-4 py-2 text-sm font-medium text-gray-400 transition-colors duration-300 hover:text-white"
           >
             Sign In
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/dashboard"
             className="relative rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-cyan/30 hover:scale-105"
           >
             Get Started
-          </a>
+          </Link>
         </div>
 
         {/* Mobile menu button */}
@@ -108,18 +109,18 @@ export default function Navbar() {
               </a>
             ))}
             <hr className="border-white/5 my-2" />
-            <a
-              href="#"
+            <Link
+              to="/dashboard"
               className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-400 transition-colors duration-200 hover:bg-white/5 hover:text-white"
             >
               Sign In
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/dashboard"
               className="rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-4 py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25"
             >
               Get Started
-            </a>
+            </Link>
           </div>
         </div>
       </div>

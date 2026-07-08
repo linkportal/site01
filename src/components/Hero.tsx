@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const roles = ['Developers', 'Creators', 'Teams', 'Innovators']
 
@@ -60,8 +61,8 @@ export default function Hero() {
 
         {/* CTA buttons */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#"
+          <Link
+            to="/dashboard"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-blue px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-cyber-cyan/25 transition-all duration-300 hover:shadow-2xl hover:shadow-cyber-cyan/30 hover:scale-105"
           >
             <span className="relative z-10">Start Building Free</span>
@@ -69,7 +70,7 @@ export default function Hero() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-[600ms] group-hover:translate-x-full" />
-          </a>
+          </Link>
           <a
             href="#features"
             className="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-8 py-3.5 text-base font-medium text-gray-300 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white"
