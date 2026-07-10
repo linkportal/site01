@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../lib/AuthContext'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -8,6 +9,8 @@ const navLinks = [
 ]
 
 export default function Navbar() {
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -16,6 +19,11 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const handleSignOut = async () => {
+    await signOut()
+    navigate('/')
+  }
 
   return (
     <nav
@@ -52,18 +60,40 @@ export default function Navbar() {
 
         {/* Desktop auth buttons */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            to="/dashboard"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-400 transition-colors duration-300 hover:text-white"
-          >
-            Sign In
-          </Link>
-          <Link
-            to="/dashboard"
-            className="relative rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-cyan/30 hover:scale-105"
-          >
-            Get Started
-          </Link>
+          {user ? (
+            <>
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-400 transition-colors duration-300 hover:text-white"
+              >
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue text-[10px] font-bold text-white">
+                  {(user.email?.[0] ?? '?').toUpperCase()}
+                </span>
+                Dashboard
+              </Link>
+              <button
+                onClick={handleSignOut}
+                className="rounded-lg border border-white/10 px-4 py-2 text-sm font-medium text-gray-400 transition-all duration-300 hover:border-white/20 hover:text-white"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-gray-400 transition-colors duration-300 hover:text-white"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/signup"
+                className="relative rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25 transition-all duration-300 hover:shadow-xl hover:shadow-cyber-cyan/30 hover:scale-105"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
@@ -93,7 +123,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`overflow-hidden transition-all duration-400 ease-in-out md:hidden ${
-          mobileOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+          mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <div className="border-t border-white/5 bg-deep-800/95 backdrop-blur-xl px-6 py-4">
@@ -109,18 +139,46 @@ export default function Navbar() {
               </a>
             ))}
             <hr className="border-white/5 my-2" />
-            <Link
-              to="/dashboard"
-              className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-400 transition-colors duration-200 hover:bg-white/5 hover:text-white"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/dashboard"
-              className="rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-4 py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25"
-            >
-              Get Started
-            </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-gray-400 transition-colors duration-200 hover:bg-white/5 hover:text-white"
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue text-[10px] font-bold text-white">
+                    {(user.email?.[0] ?? '?').toUpperCase()}
+                  </span>
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    setMobileOpen(false)
+                    handleSignOut()
+                  }}
+                  className="rounded-lg border border-white/10 px-4 py-2.5 text-center text-sm font-medium text-gray-400 transition-colors duration-200 hover:border-white/20 hover:text-white"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-400 transition-colors duration-200 hover:bg-white/5 hover:text-white"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg bg-gradient-to-r from-cyber-cyan to-cyber-blue px-4 py-2.5 text-center text-sm font-semibold text-white shadow-lg shadow-cyber-cyan/25"
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

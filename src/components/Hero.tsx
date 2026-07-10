@@ -62,7 +62,7 @@ export default function Hero() {
         {/* CTA buttons */}
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            to="/dashboard"
+            to="/signup"
             className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-cyber-cyan to-cyber-blue px-8 py-3.5 text-base font-semibold text-white shadow-xl shadow-cyber-cyan/25 transition-all duration-300 hover:shadow-2xl hover:shadow-cyber-cyan/30 hover:scale-105"
           >
             <span className="relative z-10">Start Building Free</span>

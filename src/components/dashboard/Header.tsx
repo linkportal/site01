@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../lib/AuthContext'
 
 export default function DashboardHeader() {
+  const { user } = useAuth()
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-white/5 bg-deep-900/80 px-6 backdrop-blur-xl">
       {/* Page title area */}
@@ -48,7 +50,7 @@ export default function DashboardHeader() {
 
         {/* Avatar */}
         <button className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-blue text-xs font-bold text-white shadow-lg shadow-cyber-cyan/10 transition-all duration-200 hover:shadow-xl hover:shadow-cyber-cyan/20">
-          JD
+          {(user?.email?.[0] ?? '?').toUpperCase()}
         </button>
       </div>
     </header>

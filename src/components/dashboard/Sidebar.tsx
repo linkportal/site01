@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../../lib/AuthContext'
 
 const navItems = [
   {
@@ -28,6 +29,7 @@ const navItems = [
 ]
 
 export default function Sidebar() {
+  const { user } = useAuth()
   const location = useLocation()
   const [collapsed, setCollapsed] = useState(false)
 
@@ -98,12 +100,12 @@ export default function Sidebar() {
       <div className={`border-t border-white/5 p-4 ${collapsed ? 'flex justify-center' : ''}`}>
         <div className={`flex items-center gap-3 ${collapsed ? '' : 'w-full'}`}>
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-blue text-[10px] font-bold text-white">
-            JD
+            {(user?.email?.[0] ?? '?').toUpperCase()}
           </div>
           {!collapsed && (
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium text-gray-300">John Doe</p>
-              <p className="truncate text-xs text-gray-600">john@site01.dev</p>
+              <p className="truncate text-sm font-medium text-gray-300">{user?.email?.split('@')[0] ?? 'User'}</p>
+              <p className="truncate text-xs text-gray-600">{user?.email ?? ''}</p>
             </div>
           )}
         </div>
